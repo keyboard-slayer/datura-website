@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" </head>
+    <link rel="stylesheet" href="https://unpkg.com/7.css">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://kit.fontawesome.com/bb7ec57856.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/p5@2.3.4/lib/p5.min.js"></script>
+    <script src="./js/fetch.js"></script>
+    <script src="./js/fish.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const age = new Date(Date.now() - new Date(2004, 02, 06)).getFullYear() - 1970;
+            document.getElementById("age").innerHTML = age;
+        });
+    </script>
+
+</head>
+
+<body>
+    <div class="window active" id="bio-window">
+        <div class="title-bar">
+            <div class="title-bar-text">Bio</div>
+            <div class="title-bar-controls">
+                <button aria-label="Minimize"></button>
+                <button aria-label="Maximize"></button>
+                <button aria-label="Close"></button>
+            </div>
+        </div>
+        <div class="window-body has-space">
+            <div>
+                <img src="./assets/img/datura.png" />
+                <section>
+                    <h1>Hi, I'm Datura!</h1>
+                    <p>I'm a <span id="age"></span>-years-old french artist working with Clip Studio Paint.</p>
+                    <p>I enjoy drawing all kind of subjects, but human characters is my specialty.</p>
+                    <p>I would be happy to work with you. ₍^. .^₎⟆</p>
+                </section>
+            </div>
+        </div>
+    </div>
+
+    <div class="window-flex">
+        <div class="window active" id="update-window">
+            <div class="title-bar">
+                <div class="title-bar-text">Updates</div>
+                <div class="title-bar-controls">
+                    <button aria-label="Minimize"></button>
+                    <button aria-label="Maximize"></button>
+                    <button aria-label="Close"></button>
+                </div>
+            </div>
+            <div class="window-body has-space">
+                <figure>
+                    <img id="img-update" />
+                    <figcaption>
+                        <p id="text-update"></p>
+                    </figcaption>
+                </figure>
+            </div>
+        </div>
+
+        <div class="window-column">
+            <div class="window active" id="social-window">
+                <div class="title-bar">
+                    <div class="title-bar-text">Where to find me</div>
+                    <div class="title-bar-controls">
+                        <button aria-label="Minimize"></button>
+                        <button aria-label="Maximize"></button>
+                        <button aria-label="Close"></button>
+                    </div>
+                </div>
+                <div class="window-body has-space">
+                    <ul class="tree-view has-collapse-button has-connector has-container">
+                        <details open="">
+                            <summary><i class="fa-solid fa-user-group"></i> Socials</summary>
+                            <ul>
+                                <li><a href="https://x.com/daturastramoine"><i class="fa-brands fa-twitter"></i>
+                                        Twitter</a>
+                                </li>
+
+                                <li><a href="https://instagram.com/daturastramoine"><i
+                                            class="fa-brands fa-instagram"></i>
+                                        Instagram</a></li>
+
+                                <li><a href="https://www.tiktok.com/@daturastramoine"><i
+                                            class="fa-brands fa-tiktok"></i>
+                                        Tiktok</a></li>
+                                <li><a href="https://www.reddit.com/user/daturastramoine/"><i
+                                            class="fa-brands fa-square-reddit"></i> Reddit</a></li>
+                                <li><a href="https://tumblr.com/daturastramoine"><i
+                                            class="fa-brands fa-square-tumblr"></i>
+                                        Tumblr</a></li>
+                                <li><a href="https://artfight.net/~dentist"><i class="fa-solid fa-paintbrush"></i>
+                                        Artfight</a></li>
+                                <li><a href="https://vgen.co/daturastramoine"><i class="fa-solid fa-sun"></i> Vgen</a>
+                                </li>
+                            </ul>
+                        </details>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="window active" id="more-window">
+                <div class="title-bar">
+                    <div class="title-bar-text">Fish live view</div>
+                    <div class="title-bar-controls">
+                        <button aria-label="Minimize"></button>
+                        <button aria-label="Maximize"></button>
+                        <button aria-label="Close"></button>
+                    </div>
+                </div>
+                <div class="window-body has-space" id="window-canvas">
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

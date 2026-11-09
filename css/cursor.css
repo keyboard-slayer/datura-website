@@ -1,0 +1,163 @@
+:root {
+    --cursor-default: url("../cursor/Windows 7 (Vista) Normal Select.cur"), default;
+    --cursor-pointer: url("../cursor/Windows 7 (Vista) Link Select.cur"), pointer;
+    --cursor-text:
+        url("../cursor/text-select.png") 15 16,
+        url("../cursor/Windows 7 (Vista) Text Select.cur"), text;
+    --cursor-help: url("../cursor/Windows 7 (Vista) Help Select.cur"), help;
+    --cursor-crosshair: url("../cursor/Windows 7 (Vista) Precision Select.cur"), crosshair;
+    --cursor-move: url("../cursor/Windows 7 (Vista) Move.cur"), move;
+    --cursor-not-allowed: url("../cursor/Windows 7 (Vista) Unavailable.cur"), not-allowed;
+    --cursor-no-drop: url("../cursor/Windows 7 (Vista) Unavailable.cur"), no-drop;
+    --cursor-ew-resize: url("../cursor/Windows 7 (Vista) Horizontal.cur"), ew-resize;
+    --cursor-ns-resize: url("../cursor/Windows 7 (Vista) Vertical Resize.cur"), ns-resize;
+    --cursor-nwse-resize: url("../cursor/Windows 7 (Vista) Diagonal Resize 1.cur"), nwse-resize;
+    --cursor-nesw-resize: url("../cursor/Windows 7 (Vista) Diagonal Resize 2.cur"), nesw-resize;
+    --cursor-handwriting: url("../cursor/Windows 7 (Vista) Handwriting.cur"), crosshair;
+    --cursor-alternate: url("../cursor/Windows 7 (Vista) Alternate Select.cur"), default;
+    --cursor-location: url("../cursor/Windows 7 (Vista) Location Select.cur"), pointer;
+    --cursor-person: url("../cursor/Windows 7 (Vista) Person Select.cur"), pointer;
+
+    /* Browsers that cannot decode .ani use the native progress/wait cursor. */
+    --cursor-progress: url("../cursor/Windows 7 (Vista) Working In Background.ani"), progress;
+    --cursor-wait: url("../cursor/Windows 7 (Vista) Busy.ani"), wait;
+}
+
+html,
+body,
+:root .cursor-default {
+    cursor: var(--cursor-default);
+}
+
+/* Readable text and text-entry fields. */
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+li,
+blockquote,
+figcaption,
+pre,
+code,
+textarea,
+input:not([type]),
+input[type="text"],
+input[type="search"],
+input[type="email"],
+input[type="url"],
+input[type="tel"],
+input[type="password"],
+input[type="number"],
+[contenteditable=""],
+[contenteditable="true"],
+[contenteditable="plaintext-only"],
+:root .cursor-text {
+    cursor: var(--cursor-text);
+}
+
+/* Links and interactive controls. */
+a[href],
+area[href],
+button,
+select,
+summary,
+label[for],
+input[type="button"],
+input[type="submit"],
+input[type="reset"],
+input[type="checkbox"],
+input[type="radio"],
+input[type="range"],
+input[type="color"],
+input[type="file"],
+[role="button"],
+:root .cursor-pointer {
+    cursor: var(--cursor-pointer);
+}
+
+/* Keep text/icons inside clickable elements on the same cursor. */
+a[href] *,
+button *,
+summary *,
+label[for] *,
+[role="button"] * {
+    cursor: inherit;
+}
+
+/* Opt-in states: apply these classes only where the action is available. */
+:root .cursor-help,
+abbr[title] {
+    cursor: var(--cursor-help);
+}
+
+:root .cursor-crosshair {
+    cursor: var(--cursor-crosshair);
+}
+
+:root .cursor-move,
+:root [draggable="true"] {
+    cursor: var(--cursor-move);
+}
+
+:root .cursor-ew-resize {
+    cursor: var(--cursor-ew-resize);
+}
+
+:root .cursor-ns-resize {
+    cursor: var(--cursor-ns-resize);
+}
+
+:root .cursor-nwse-resize {
+    cursor: var(--cursor-nwse-resize);
+}
+
+:root .cursor-nesw-resize {
+    cursor: var(--cursor-nesw-resize);
+}
+
+:root .cursor-handwriting {
+    cursor: var(--cursor-handwriting);
+}
+
+:root .cursor-alternate {
+    cursor: var(--cursor-alternate);
+}
+
+:root .cursor-location {
+    cursor: var(--cursor-location);
+}
+
+:root .cursor-person {
+    cursor: var(--cursor-person);
+}
+
+:root .cursor-no-drop {
+    cursor: var(--cursor-no-drop);
+}
+
+:root [aria-busy="true"],
+:root [aria-busy="true"] *,
+:root .cursor-progress,
+:root .cursor-progress * {
+    cursor: var(--cursor-progress);
+}
+
+:root .cursor-wait,
+:root .cursor-wait * {
+    cursor: var(--cursor-wait);
+}
+
+/* Disabled states take precedence over interactive cursors. */
+:root :disabled,
+:root [aria-disabled="true"],
+:root .cursor-not-allowed {
+    cursor: var(--cursor-not-allowed);
+}
+
+:root :disabled *,
+:root [aria-disabled="true"] * {
+    cursor: inherit;
+}
