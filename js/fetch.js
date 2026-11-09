@@ -1,29 +1,41 @@
 document.addEventListener("DOMContentLoaded", () => {
-    fetch("https://daturastramoine.tumblr.com/api/read")
-        .then(r => r.blob())
-        .then(b => b.text())
-        .then(function(rss) {
-            const parser = new DOMParser();
-            const xmlDoc = parser.parseFromString(rss, "text/xml");
+    const titleBar = document.querySelector("#update-window .title-bar-text");
+    const image = document.getElementById("img-update");
+    const text = document.getElementById("text-update");
+    const script = document.createElement("script");
 
-            const post = xmlDoc.getElementsByTagName("post")[0];
-            const body = post?.querySelector("regular-body")?.textContent ?? "";
+    text.innerText = "Loading update…";
 
-            const htmlDoc = parser.parseFromString(body, "text/html");
-            const img = htmlDoc.querySelector("img");
+    const showError = () => {
+        clearTimeout(timeout);
+        text.innerText = "Unable to load the update. Please refresh to try again.";
+        script.remove();
+    };
+    const timeout = setTimeout(showError, 10000);
 
-            const title = htmlDoc.querySelector("h1")?.textContent.trim() ?? "";
-            document.querySelector("#update-window").querySelector(".title-bar-text").innerText = title;
+    window.daturaUpdateLoaded = data => {
+        clearTimeout(timeout);
+        const post = data.posts?.[0];
+        if (!post) {
+            text.innerText = "No updates yet.";
+            return;
+        }
 
-            const text = [...htmlDoc.querySelectorAll("p")]
-                .map(p => p.textContent.trim())
-                .filter(Boolean)
-                .join("\n\n");
+        const htmlDoc = new DOMParser().parseFromString(post["regular-body"] ?? "", "text/html");
+        titleBar.innerText = htmlDoc.querySelector("h1")?.textContent.trim() ||
+            post["regular-title"] || "Updates";
+        text.innerText = [...htmlDoc.querySelectorAll("p")]
+            .map(p => p.textContent.trim())
+            .filter(Boolean)
+            .join("\n\n");
 
+        const imageUrl = htmlDoc.querySelector("img")?.getAttribute("src");
+        if (imageUrl) image.src = imageUrl;
+    };
 
-            const imageUrl = img?.getAttribute("src");
-            document.getElementById("img-update").setAttribute("src", imageUrl);
-            document.getElementById("text-update").innerText = text;
-        });
+    script.src = "https://daturastramoine.tumblr.com/api/read/json?num=1&callback=daturaUpdateLoaded";
+    script.async = true;
+    script.onerror = showError;
+    script.onload = () => script.remove();
+    document.head.append(script);
 });
-

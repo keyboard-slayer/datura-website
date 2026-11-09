@@ -10,7 +10,21 @@ async function setup() {
     fish = await loadModel('../assets/fish/sacabambaspis_fish_meme_fish.obj', true);
     tex = await loadImage("../assets/fish/texture_0.png");
 
-    createCanvas(400, 200, WEBGL).parent("window-canvas", true);
+    const container = document.getElementById("window-canvas");
+    createCanvas(
+        Math.max(1, container.clientWidth),
+        Math.max(1, container.clientHeight),
+        WEBGL
+    ).parent(container);
+
+    const observer = new ResizeObserver(([entry]) => {
+        const canvasWidth = Math.max(1, Math.floor(entry.contentRect.width));
+        const canvasHeight = Math.max(1, Math.floor(entry.contentRect.height));
+        if (width !== canvasWidth || height !== canvasHeight) {
+            resizeCanvas(canvasWidth, canvasHeight);
+        }
+    });
+    observer.observe(container);
 }
 
 function draw() {
@@ -40,6 +54,7 @@ function draw() {
 
     rotateZ(3.1);
     rotateY(-1.5);
+    scale(Math.min(width / 180, height / 160));
 
     ambientLight(150);
     directionalLight(255, 255, 255, -1, 1, -1);

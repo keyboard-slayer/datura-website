@@ -1,82 +1,103 @@
 @import "font.css";
-@import "cursor.css";
 
 :root {
     --w7-w-bg: rgb(155, 155, 187);
+    --window-gap: 20px;
 }
 
-#bio-window {
-    max-width: 55%;
-    margin: 1% auto;
+body {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: var(--window-gap);
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 16px;
+}
+
+.window {
+    box-sizing: border-box;
+    min-width: 0;
+    width: 100%;
+    margin: 0;
+}
+
+.title-bar-text {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.title-bar-controls {
+    flex-shrink: 0;
+}
+
+#bio-window .window-body {
+    padding: 16px;
     text-align: center;
 }
 
-#bio-window .window-body{
-    padding-right: 5%;
-    padding-left: 5%;
-}
-
-.window-body div {
+#bio-window .window-body > div {
     display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
 }
 
 .window-body section {
+    min-width: 0;
     font-family: SegoeUI, Tahoma, sans-serif;
-    font-size: 18px;
-    text-align: justify;
+    overflow-wrap: anywhere;
 }
 
-.window-body div section h1 {
-    letter-spacing: 1px;
+#bio-window h1 {
+    margin-top: 0;
     font-weight: 500;
     font-size: 32px;
     color: #24021d;
 }
 
 img[src="./assets/img/datura.png"] {
-    text-align: center;
-    width: 75%;
+    display: block;
+    width: 100%;
+    max-width: 480px;
+    height: auto;
 }
 
 #img-update {
     display: block;
-    flex: 1;
     width: 100%;
-    height: 0;
+    height: 100%;
     min-height: 0;
     object-fit: contain;
 }
 
-.window-flex {
+.window-flex,
+.window-column {
     display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    gap: 2%;
+    flex-direction: column;
+    gap: var(--window-gap);
+    min-width: 0;
+    width: 100%;
+}
+
+.window-flex {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: stretch;
+}
+
+.window-column {
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr);
+    min-height: 0;
 }
 
 #update-window,
 .window-column {
-    width: 25%;
-    min-width: 0;
-    argin: 0;
-    box-sizing: border-box;
-    text-align: center;
-}
-
-.window-column {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
-
-.window-column > .window {
     width: 100%;
-    margin: 0;
-    box-sizing: border-box;
-}
-
-#more-window .window-body {
-    min-height: 96px;
+    text-align: center;
 }
 
 #social-window ul {
@@ -89,31 +110,101 @@ img[src="./assets/img/datura.png"] {
     height: 500px;
 }
 
-#update-window > .title-bar {
+#update-window>.title-bar {
     flex-shrink: 0;
 }
 
-#update-window > .window-body {
-    display: flex;
-    flex-direction: column;
+#update-window>.window-body {
+    display: grid;
+    grid-template-rows: minmax(0, 1fr);
     flex: 1;
     min-height: 0;
     overflow: hidden;
 }
 
 #update-window figure {
-    display: flex;
-    flex-direction: column;
-    flex: 1;
+    display: grid;
+    grid-template-rows: minmax(0, 1fr) auto;
     min-width: 0;
     min-height: 0;
     margin: 0;
 }
 
 #update-window figcaption {
-    flex-shrink: 0;
-    max-height: 30%;
+    max-height: 135px;
     overflow: auto;
     overflow-wrap: anywhere;
 }
 
+#more-window {
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr);
+    min-height: 0;
+}
+
+#window-canvas {
+    position: relative;
+    min-width: 0;
+    min-height: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+#window-canvas canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    max-width: 100%;
+    max-height: 100%;
+}
+
+@media screen and (max-width: 600px) {
+    body {
+        padding: 12px;
+        --window-gap: 12px;
+    }
+
+    .window-flex .title-bar-text {
+        white-space: normal;
+    }
+
+    .window-flex .title-bar-controls button:not([aria-label="Close"]) {
+        display: none;
+    }
+
+    #social-window .window-body {
+        padding: 4px;
+    }
+
+    #social-window .tree-view ul {
+        padding-left: 10px;
+    }
+
+    #social-window a {
+        white-space: nowrap;
+    }
+}
+
+@media screen and (min-width: 1001px) {
+    #bio-window {
+        font-size: 18px;
+    }
+
+    #bio-window .window-body > div {
+        flex-direction: row;
+        text-align: left;
+        gap: 24px;
+    }
+
+    img[src="./assets/img/datura.png"] {
+        width: 45%;
+        flex-shrink: 0;
+    }
+
+    #bio-window h1 {
+        letter-spacing: 1px;
+    }
+}
